@@ -1,8 +1,9 @@
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
-from airflow.operators.s3_operator import S3UploadOperator
-from airflow.hooks.http_hook import HttpHook
+from airflow.operators.python import PythonOperator
+from airflow.providers.amazon.s3.operators.s3 import S3UploadOperator
+from airflow.providers.http.hooks.http import HttpHook
 import requests
+import datetime
 
 default_args = {
     "owner": "airflow",
@@ -40,5 +41,5 @@ upload_to_s3_task = PythonOperator(
     dag=dag
 )
 
-download_pdf_task >> upload_to_s3_task
+#download_pdf_task >> upload_to_s3_task
 
